@@ -169,10 +169,11 @@ echo "##### System ready, press any key to begin rotation  #####"
 read -r none
 N=0
 LAST_DEL="$NB_VI"
-SLEEP=15
+SLEEPMAX=15
 # Inifity loop
 while :
 do
+    SLEEP=$(shuf -i1-$SLEEPMAX -n1)  
     echo "Sleep $SLEEP "
     sleep "$SLEEP"
     echo "Rotation $N begin"
