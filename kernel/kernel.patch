@@ -1,0 +1,72 @@
+diff --git a/net/core/flow_dissector.c b/net/core/flow_dissector.c
+index 03b6e649c428..19555a932494 100644
+--- a/net/core/flow_dissector.c
++++ b/net/core/flow_dissector.c
+@@ -36,6 +36,10 @@
+ #endif
+ #include <linux/bpf-netns.h>
+ 
++#ifdef CONFIG_IP_ROUTE_MULTIPATH
++extern u8 custom_multipath;
++#endif
++
+ static void dissector_set_key(struct flow_dissector *flow_dissector,
+ 			      enum flow_dissector_key_id key_id)
+ {
+@@ -1582,11 +1586,20 @@ static inline u32 __flow_hash_from_keys(struct flow_keys *keys,
+ 					const siphash_key_t *keyval)
+ {
+ 	u32 hash;
+-
++#ifdef CONFIG_IP_ROUTE_MULTIPATH
++	if(custom_multipath){
++		hash = siphash(&current->tgid,
++                                4, keyval);
++	} else {
++                __flow_hash_consistentify(keys);
++                hash = siphash(flow_keys_hash_start(keys),
++				flow_keys_hash_length(keys), keyval);
++        }
++#else
+ 	__flow_hash_consistentify(keys);
+-
+ 	hash = siphash(flow_keys_hash_start(keys),
+ 		       flow_keys_hash_length(keys), keyval);
++#endif
+ 	if (!hash)
+ 		hash = 1;
+ 
+diff --git a/net/core/sysctl_net_core.c b/net/core/sysctl_net_core.c
+index 7123fe7feeac..65f15609e419 100644
+--- a/net/core/sysctl_net_core.c
++++ b/net/core/sysctl_net_core.c
+@@ -34,6 +34,11 @@ static long long_max __maybe_unused = LONG_MAX;
+ 
+ static int net_msg_warn;	/* Unused, but still a sysctl */
+ 
++#ifdef CONFIG_IP_ROUTE_MULTIPATH
++u8 custom_multipath __read_mostly = 0;	/* Custom value for local multipath */
++EXPORT_SYMBOL(custom_multipath);
++#endif
++
+ int sysctl_fb_tunnels_only_for_init_net __read_mostly = 0;
+ EXPORT_SYMBOL(sysctl_fb_tunnels_only_for_init_net);
+ 
+@@ -579,6 +584,17 @@ static struct ctl_table net_core_table[] = {
+ 		.extra1		= SYSCTL_ONE,
+ 		.extra2		= &int_3600,
+ 	},
++#ifdef CONFIG_IP_ROUTE_MULTIPATH
++	{
++                .procname       = "custom_multipath",
++                .data           = &custom_multipath,
++                .maxlen         = sizeof(u8),
++                .mode           = 0644,
++                .proc_handler   = proc_dou8vec_minmax,
++                .extra1         = SYSCTL_ZERO,
++                .extra2         = SYSCTL_ONE,
++        },
++#endif
+ 	{ }
+ };
+ 
