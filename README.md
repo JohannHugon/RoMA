@@ -11,15 +11,15 @@ To do this we implement a small kernel patch to make the splitting depending on 
 
 ## Requirements
 To use this project you need :
-    - Network card which use ATH9K DRIVER (tested with Qualcomm Atheros QCA9377)
-    - Linux distribution ( >= 5.18)
-    - Install custom kernel / custom patch 
-    - Packages : 
-        - netctl
-        - dhcpcd
-        - macchanger
-        - iw
-        - iproute2 (ip route, ip rule, ss)
+- Network card which use ATH9K DRIVER (tested with Qualcomm Atheros QCA9377)
+- Linux distribution ( >= 5.18)
+- Install custom kernel / custom patch 
+- Packages : 
+    - netctl
+    - dhcpcd
+    - macchanger
+    - iw
+    - iproute2 (ip route, ip rule, ss)
 
 ## Utilisation guide
 Since all is installed and your kernel is patch. 
