@@ -103,7 +103,7 @@ if [ "$(grep CONFIG_INET_DIAG_DESTROY /boot/config-"$(uname -r)")" != "CONFIG_IN
 fi
 
 # Check packages
-LIST_PKG="netctl macchanger iw ss dhcpcd foo"
+LIST_PKG="netctl macchanger iw ss dhcpcd"
 for PKG in $LIST_PKG
 do
     if  ! type "$PKG" > /dev/null ; then
