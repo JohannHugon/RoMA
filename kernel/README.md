@@ -1,5 +1,5 @@
 # Custom kernel
-To use RoMA you need to use a customed version avec linux kernel.
+To use RoMA you need to use a customed version of linux kernel.
 It's only affect the way how the traffic between multiple route is manage.
 It also add a sysctl parameter (custom_multipath), this parameter can be set to 0 or 1.
 If it's set to 0 the traffic is split depending on client/server information (native) and to 1 to use our custom code to split it depending on PID.
