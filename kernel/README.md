@@ -14,18 +14,19 @@ Then install all the package you need to compile the kernel
 ```
 sudo apt-get install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison
 ```
-Load the actual config of your kernel and then configure it.
+Load the actual config of your kernel and then configure it.   
 Don't forget to set CONFIG_INET_DIAG_DESTROY to Y
 ```
 cd linux-5.18.5
 cp -v /boot/config-$(uname -r) .config
 make menuconfig
 ```
-apply the patch 
+Apply the patch 
 ```
 patch -ruN -d . < kernel.patch
 ```
-And finaly compile and install it !
+And finaly compile and install it !   
+You can use the option -j of make to use more than one CPU core
 ```
 make
 sudo make modules_install
