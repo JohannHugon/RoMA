@@ -13,7 +13,7 @@ To do this we implement a small kernel patch to make the splitting depending on 
 To use this project you need :
 - Network card which use ATH9K DRIVER (tested with Qualcomm Atheros QCA9377)
 - Linux distribution ( >= 5.18)
-- Install custom kernel / custom patch 
+- Install custom kernel patch 
 - Packages : 
     - netctl
     - dhcpcd
