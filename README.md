@@ -27,7 +27,7 @@ You only have to launch the script rotation.sh in this way :
 ```
 ./rotation.sh [NUMBER OF VIRTUAL INTERFACES] [SSID OF THE NETWORK] [PASSWORD OF NETWORK]
 ```
-Then the script will setup all the system and when it's ready begin the rotation.
+Then the script will setup all the system and when it's ready begin the rotation.   
 To stop RoMA, you have to press CTRL^C. 
 It will stop properly and reset the system to its initial state.
 
