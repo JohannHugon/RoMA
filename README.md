@@ -34,4 +34,5 @@ It will stop properly and reset the system to its initial state.
 ## FAQ
 ### Can I use the system without modifing my kernel?
 You can use RoMA without patching the kernel but you lose the PID routing. 
-Processus will split randomly their socket on all the virtuals interfaces, so if an attacker listen, traffic, he could infer on it and guess that the traffic is owned by the same computer wich use our system.
+Processus will split randomly their socket on all the virtuals interfaces.
+In this case, if an attacker listens network traffic, he could infer about it and guess that the traffic is owned by the same computer which use our system.
