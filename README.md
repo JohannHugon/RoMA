@@ -9,6 +9,8 @@ When the operating system has more than one default network path, it tries to eq
 For our usage, we need to limit application to only one path at the time. 
 To do this we implement a small kernel patch to make the splitting depending on PID and not on source/destination server.
 
+More information can be found in the extended abstract of our demonstration at SIGCOMM.'22 Proceedings of the SIGCOMM '22 Poster and Demo Sessions : https://doi.org/10.1145/3546037.3546055
+
 ## Requirements
 To use this project you need :
 - Network card which use ATH9K DRIVER (tested with Qualcomm Atheros QCA9377)
